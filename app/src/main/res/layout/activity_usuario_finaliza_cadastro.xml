@@ -1,79 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/cor_principal"
-    android:orientation="vertical"
-    tools:context=".fragment.EmpresaFragment">
+    tools:context=".activity.usuario.UsuarioFinalizaCadastroActivity">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="24dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="24dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:text="E-mail"/>
+                android:text="Nome"
+                android:textSize="16sp"/>
 
             <EditText
-                android:id="@+id/edt_email"
+                android:id="@+id/edt_nome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/bg_edit"
-                android:padding="16dp"
-                android:drawableStart="@drawable/ic_email_red"
+                android:background="@drawable/bg_edit2"
+                android:drawableStart="@drawable/ic_user_on"
                 android:drawablePadding="16dp"
-                android:inputType="textEmailAddress"
-                android:hint="Digite seu e-mail"/>
+                android:hint="Nome"
+                android:inputType="text"
+                android:padding="16dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
                 android:layout_marginTop="16dp"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:text="Senha"/>
+                android:text="Telefone"
+                android:textSize="16sp"/>
 
-            <EditText
-                android:id="@+id/edt_senha"
+            <com.santalu.maskara.widget.MaskEditText
+                android:id="@+id/edt_telefone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/bg_edit"
-                android:padding="16dp"
-                android:drawableStart="@drawable/ic_password"
-                android:drawablePadding="16dp"
-                android:inputType="textPassword"
-                android:hint="Digite sua senha"/>
+                android:inputType="number"
+                app:mask="(__) _____-____"
+                android:background="@drawable/bg_edit2"
+                android:padding="16sp"
+                android:drawableStart="@drawable/ic_telefone"
+                android:drawablePadding="16sp"
+                android:hint="Telefone"
+                app:maskCharacter="_"
+                app:maskStyle="completable" />
 
             <android.widget.Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Cria conta"
-                android:textColor="@color/cor_principal"
+                android:background="@drawable/bg_edit"
+                android:backgroundTint="#FF0000"
+                android:text="Finalizar"
+                android:onClick="validaDados"
                 android:textAllCaps="false"
-                android:textSize="16sp"
-                android:background="@drawable/bg_edit"/>
-
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -81,14 +79,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
-                android:theme="@style/ThemeProgressBarBranca"
+                android:theme="@style/ThemeProgressBarVermelha"
                 android:visibility="gone"
-                tools:visibility="visible"/>
+                tools:visibility="visible" />
 
         </LinearLayout>
 
 
     </ScrollView>
 
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

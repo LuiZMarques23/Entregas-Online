@@ -3,12 +3,19 @@
     <style name="Base.Theme.EntregasOnline" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/my_light_primary</item>
+        <item name="colorSecondary">@color/cor_principal</item>
     </style>
 
     <style name="Theme.EntregasOnline" parent="Base.Theme.EntregasOnline" />
 
-    <style name="ThemeProgressBar" parent="Base.Theme.EntregasOnline">
+    <style name="ThemeProgressBarBranca" parent="Base.Theme.EntregasOnline">
         <item name="colorAccent">@color/white</item>
+
+    </style>
+
+    <style name="ThemeProgressBarVermelha" parent="Base.Theme.EntregasOnline">
+        <item name="colorAccent">#FF0000</item>
+
     </style>
 
     <style name="CustomStyleTabLayout" parent="Base.Theme.EntregasOnline">
