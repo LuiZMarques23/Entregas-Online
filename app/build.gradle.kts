@@ -46,4 +46,11 @@ dependencies {
 
     // https://github.com/santalu/maskara
     implementation ("com.github.santalu:maskara:1.0.0")
+
+    // https://github.com/BlacKCaT27/CurrencyEditText
+    implementation ("com.github.BlacKCaT27:CurrencyEditText:2.0.2")
+
+    // https://github.com/ParkSangGwon/TedPermission
+    // Normal
+    implementation ("io.github.ParkSangGwon:tedpermission-normal:3.3.0")
 }

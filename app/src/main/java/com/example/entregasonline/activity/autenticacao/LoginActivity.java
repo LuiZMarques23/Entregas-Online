@@ -15,9 +15,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.entregasonline.R;
+import com.example.entregasonline.activity.empresa.EmpresaFinalizaCadastroActivity;
+import com.example.entregasonline.activity.empresa.EmpresaHomeActivity;
 import com.example.entregasonline.activity.usuario.UsuarioFinalizaCadastroActivity;
 import com.example.entregasonline.activity.usuario.UsuarioHomeActivity;
 import com.example.entregasonline.helper.FirebaseHelper;
+import com.example.entregasonline.model.Empresa;
 import com.example.entregasonline.model.Login;
 import com.example.entregasonline.model.Usuario;
 import com.google.firebase.database.DataSnapshot;
@@ -91,16 +94,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 login = snapshot.getValue(Login.class);
-                if (login != null){
-                    if (login.getAcesso()){
-                        startActivity(new Intent(getBaseContext(), UsuarioHomeActivity.class));
-                    }else {
-                        recuperaUsuario();
+
+                verificaAcesso(login);
 
 
-                    }
-                    finish();
-                }
             }
 
             @Override
@@ -108,6 +105,32 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void verificaAcesso(Login login){
+        if (login != null){
+            if (login.getTipo().equals("U")){
+                if (login.getAcesso()){
+                    finish();
+                    startActivity(new Intent(getBaseContext(), UsuarioHomeActivity.class));
+                }else {
+                    recuperaUsuario();
+
+
+                }
+            }else {
+                if (login.getAcesso()){
+                    finish();
+                    startActivity(new Intent(getBaseContext(), EmpresaHomeActivity.class));
+                }else {
+                    recuperaEmpresa();
+
+
+                }
+            }
+
+
+        }
     }
     private void recuperaUsuario(){
         DatabaseReference usuarioRef = FirebaseHelper.getDatabaseReference()
@@ -118,9 +141,33 @@ public class LoginActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Usuario usuario = snapshot.getValue(Usuario.class);
                 if (usuario != null){
+                    finish();
                     Intent intent = new Intent(getBaseContext(), UsuarioFinalizaCadastroActivity.class);
                     intent.putExtra("login", login);
                     intent.putExtra("usuario", usuario);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    private void recuperaEmpresa(){
+        DatabaseReference empresaRef = FirebaseHelper.getDatabaseReference()
+                .child("empresas")
+                .child(login.getId());
+        empresaRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Empresa empresa = snapshot.getValue(Empresa.class);
+                if (empresa != null){
+                    finish();
+                    Intent intent = new Intent(getBaseContext(), EmpresaFinalizaCadastroActivity.class);
+                    intent.putExtra("login", login);
+                    intent.putExtra("empresa", empresa);
                     startActivity(intent);
                 }
             }
