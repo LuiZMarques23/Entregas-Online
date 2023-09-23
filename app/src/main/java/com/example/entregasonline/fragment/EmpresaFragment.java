@@ -17,11 +17,9 @@ import android.widget.ProgressBar;
 
 import com.example.entregasonline.R;
 import com.example.entregasonline.activity.empresa.EmpresaFinalizaCadastroActivity;
-import com.example.entregasonline.activity.usuario.UsuarioFinalizaCadastroActivity;
 import com.example.entregasonline.helper.FirebaseHelper;
 import com.example.entregasonline.model.Empresa;
 import com.example.entregasonline.model.Login;
-import com.example.entregasonline.model.Usuario;
 
 public class EmpresaFragment extends Fragment {
 

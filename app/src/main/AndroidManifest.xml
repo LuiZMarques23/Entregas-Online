@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
 
     <application
@@ -17,10 +18,10 @@
         android:theme="@style/Theme.EntregasOnline"
         tools:targetApi="31">
         <activity
-            android:name=".activity.empresa.EmpresaHomeActivity"
+            android:name=".activity.empresa.EmpresaFinalizaCadastroActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.empresa.EmpresaFinalizaCadastroActivity"
+            android:name=".activity.empresa.EmpresaHomeActivity"
             android:exported="false" />
         <activity
             android:name=".activity.usuario.UsuarioHomeActivity"
@@ -36,6 +37,9 @@
             android:exported="false" />
         <activity
             android:name=".activity.autenticacao.LoginActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.app.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,9 +47,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SplashActivity"
-            android:exported="false" />
         <activity
             android:name=".activity.MainActivity"
             android:exported="true" />

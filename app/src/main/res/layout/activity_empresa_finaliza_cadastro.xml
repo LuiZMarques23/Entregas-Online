@@ -211,7 +211,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAllCaps="false"
-                android:onClick="validaDados"
+                android:onClick="validadDados"
                 android:text="Finalizar"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/bg_edit"
@@ -230,5 +230,6 @@
         </LinearLayout>
 
     </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

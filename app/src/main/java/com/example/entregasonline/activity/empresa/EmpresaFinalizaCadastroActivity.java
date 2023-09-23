@@ -1,7 +1,5 @@
 package com.example.entregasonline.activity.empresa;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,7 +33,6 @@ import com.gun0912.tedpermission.normal.TedPermission;
 import com.santalu.maskara.widget.MaskEditText;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 import java.util.Locale;
 
@@ -53,6 +50,7 @@ public class EmpresaFinalizaCadastroActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private String caminhoLogo = "";
     private Empresa empresa;
+
     private Login login;
 
     @Override
@@ -70,9 +68,8 @@ public class EmpresaFinalizaCadastroActivity extends AppCompatActivity {
     }
     public void selecionaLogo(View view){
         verificaPermissaoGaleria();
-
     }
-    public void validaDados(View view){
+    public void validadDados(View view){
 
         String nome = edt_nome.getText().toString().trim();
         String telefone = edt_telefone.getUnMasked();
@@ -80,22 +77,22 @@ public class EmpresaFinalizaCadastroActivity extends AppCompatActivity {
         double pedidoMinimo = (double) edt_pedido_minimo.getRawValue() / 100;
 
         int tempoMinimo = 0;
-        if (!edt_tempo_minimo.getText().toString().isEmpty()) tempoMinimo = Integer.parseInt(edt_tempo_minimo.getText().toString());
+        if (!edt_tempo_minimo.getText().toString().isEmpty()) tempoMinimo =  Integer.parseInt(edt_pedido_minimo.getText().toString());
 
         int tempoMaximo = 0;
-        if (!edt_Tempo_maximo.getText().toString().isEmpty()) tempoMaximo = Integer.parseInt(edt_Tempo_maximo.getText().toString());
+        if (!edt_Tempo_maximo.getText().toString().isEmpty()) tempoMinimo =  Integer.parseInt(edt_Tempo_maximo.getText().toString());
+
 
         String categoria = edt_categoria.getText().toString().trim();
 
         if (!caminhoLogo.isEmpty()){
             if (!nome.isEmpty()){
                 if (edt_telefone.isDone()){
-                    if (tempoMinimo > 0){
-                        if (tempoMaximo > 0){
+                    if (tempoMinimo > 0 ){
+                        if (tempoMaximo > 0 ){
                             if (!categoria.isEmpty()){
 
                                 ocultarTeclado();
-
                                 progressBar.setVisibility(View.VISIBLE);
 
                                 empresa.setNome(nome);
@@ -106,37 +103,34 @@ public class EmpresaFinalizaCadastroActivity extends AppCompatActivity {
                                 empresa.setTempoMaxEntrega(tempoMaximo);
                                 empresa.setCategoria(categoria);
 
-                                salvarImagemFirebase();
-
                             }else {
                                 edt_categoria.requestFocus();
                                 edt_categoria.setError("Informe uma categoria para seu cadastro.");
                             }
-
                         }else {
                             edt_Tempo_maximo.requestFocus();
-                            edt_Tempo_maximo.setError("Infome o tempo máximo de entrega.");
+                            edt_Tempo_maximo.setError("Informe um tempo máximo de entrega.");
                         }
 
                     }else {
-                        edt_tempo_minimo.requestFocus();
-                        edt_tempo_minimo.setError("Infome o tempo minimo de entrega.");
+                        edt_pedido_minimo.requestFocus();
+                        edt_pedido_minimo.setError("Informe um tempo minimo de entrega.");
                     }
+
                 }else {
                     edt_telefone.requestFocus();
-                    edt_telefone.setError("Infome um telefone para contato.");
-
+                    edt_telefone.setError("Informe um telefone para contato.");
                 }
 
             }else {
                 edt_nome.requestFocus();
                 edt_nome.setError("Informe um nome para seu cadastro.");
             }
+
         }else {
             progressBar.setVisibility(View.GONE);
             ocultarTeclado();
-            erroAutenticacao("Selecine uma logo para seu cadastro.");
-
+            erroAutenticacao("Selecione uma logo para seu cadastro.");
         }
     }
     private void verificaPermissaoGaleria(){
@@ -149,20 +143,24 @@ public class EmpresaFinalizaCadastroActivity extends AppCompatActivity {
 
             @Override
             public void onPermissionDenied(List<String> deniedPermissions) {
-                Toast.makeText(EmpresaFinalizaCadastroActivity.this, "Permissão negada!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EmpresaFinalizaCadastroActivity.this, "Permissão negada.", Toast.LENGTH_SHORT).show();
             }
+
 
         };
 
         TedPermission.create()
                 .setPermissionListener(permissionlistener)
-                .setDeniedTitle("Permissão")
+                .setDeniedTitle("Permissão negada !")
                 .setDeniedMessage("Se você não aceitar a permissão não poderá acessar a Galeria do dispositivo, deseja ativar a permissão agora ?")
                 .setDeniedCloseButtonText("Não")
                 .setGotoSettingButtonText("Sim")
                 .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE)
                 .check();
+
+
     }
+
     private void abrirGaleria(){
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, REQUEST_GALERIA);
@@ -173,8 +171,10 @@ public class EmpresaFinalizaCadastroActivity extends AppCompatActivity {
                 .child("imagens")
                 .child("perfil")
                 .child(empresa.getId() + ".JPEG");
+
         UploadTask uploadTask = storageReference.putFile(Uri.parse(caminhoLogo));
         uploadTask.addOnSuccessListener(taskSnapshot -> storageReference.getDownloadUrl().addOnCompleteListener(task -> {
+
 
             login.setAcesso(true);
             login.salvar();
@@ -188,8 +188,6 @@ public class EmpresaFinalizaCadastroActivity extends AppCompatActivity {
 
         })).addOnFailureListener(e -> erroAutenticacao(e.getMessage()));
     }
-
-
     private void erroAutenticacao(String msg){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Atenção");
@@ -201,7 +199,6 @@ public class EmpresaFinalizaCadastroActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
     private void iniciaComponentes(){
         img_logo = findViewById(R.id.img_logo);
         edt_nome = findViewById(R.id.edt_nome);
@@ -218,7 +215,6 @@ public class EmpresaFinalizaCadastroActivity extends AppCompatActivity {
         edt_categoria = findViewById(R.id.edt_categoria);
         progressBar = findViewById(R.id.progressBar);
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
