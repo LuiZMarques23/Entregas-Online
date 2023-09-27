@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import com.example.entregasonline.R;
 import com.example.entregasonline.adapter.ViewPagerAdapter;
-import com.example.entregasonline.fragment.EmpresaFragment;
-import com.example.entregasonline.fragment.UsuarioFragment;
+import com.example.entregasonline.fragment.empresa.EmpresaFragment;
+import com.example.entregasonline.fragment.usuario.UsuarioCriarContaFragment;
 import com.google.android.material.tabs.TabLayout;
 
 public class CriarContaActivity extends AppCompatActivity {
@@ -36,7 +36,7 @@ public class CriarContaActivity extends AppCompatActivity {
     }
     private void configTabsLayout(){
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new UsuarioFragment(), "Usuario");
+        viewPagerAdapter.addFragment(new UsuarioCriarContaFragment(), "Usuario");
         viewPagerAdapter.addFragment(new EmpresaFragment(), "Empresa");
 
         view_pager.setAdapter(viewPagerAdapter);

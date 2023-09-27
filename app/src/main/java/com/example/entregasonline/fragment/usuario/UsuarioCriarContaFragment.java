@@ -1,4 +1,4 @@
-package com.example.entregasonline.fragment;
+package com.example.entregasonline.fragment.usuario;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,7 +22,7 @@ import com.example.entregasonline.model.Login;
 import com.example.entregasonline.model.Usuario;
 
 
-public class UsuarioFragment extends Fragment {
+public class UsuarioCriarContaFragment extends Fragment {
 
     private EditText edt_email;
     private EditText edt_senha;

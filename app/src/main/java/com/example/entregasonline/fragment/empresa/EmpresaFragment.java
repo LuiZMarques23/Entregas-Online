@@ -1,4 +1,4 @@
-package com.example.entregasonline.fragment;
+package com.example.entregasonline.fragment.empresa;
 
 import android.content.Context;
 import android.content.Intent;

@@ -8,6 +8,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
 import android.os.Build;
@@ -57,6 +58,7 @@ public class EmpresaFinalizaCadastroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_empresa_finaliza_cadastro);
+        getWindow().setStatusBarColor(Color.parseColor("#EA1C2B"));
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
